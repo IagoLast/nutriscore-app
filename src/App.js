@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import nutriscoreService from './services/nutriscore.service';
 
 export default class App extends React.Component {
   constructor() {
@@ -42,11 +43,11 @@ export default class App extends React.Component {
             <label htmlFor="vegetableFruitNuts">Ratio of fruit, vegetables and nuts (in %)</label>
             <input type="text" id="vegetableFruitNuts" step="0.0001" onChange={event => this.setState({ vegetableFruitNuts: event.target.value })} />
 
-            <input type="submit" value="Calculate the Nutri-Score" />
+            <input id="submit" type="submit" value="Calculate the Nutri-Score" />
           </fieldset>
 
         </form >
-        <h1>
+        <h1 id="nutriscore">
           {this.state.nutriScore}
         </h1>
       </React.Fragment>
@@ -55,6 +56,15 @@ export default class App extends React.Component {
 
   _computeNutriScore(event) {
     event.preventDefault();
-    this.setState({ nutriScore: '?' });
+    const nutriScore = nutriscoreService.computeScore({
+      energy: this.state.energy,
+      saturatedFat: this.state.saturatedFat,
+      sugar: this.state.sugar,
+      protein: this.state.protein,
+      fibre: this.state.fibre,
+      salt: this.state.salt,
+      vegetableFruitNuts: this.state.vegetableFruitNuts
+    });
+    this.setState({ nutriScore });
   }
 }
