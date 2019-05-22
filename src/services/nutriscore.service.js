@@ -1,14 +1,12 @@
 export function computeScore({ energy, saturatedFat, sugar, salt, fibre, protein, vegetableFruitNuts }) {
     const positivePoints = _computePositivepoints({ energy, saturatedFat, sugar, salt, fibre, protein, vegetableFruitNuts });
     const negativePoints = _computeNegativepoints({ energy, saturatedFat, sugar, salt, fibre, protein, vegetableFruitNuts });
-    if (negativePoints < 11) {
-        return negativePoints - positivePoints;
-    }
     const fruitPctPoints = _computeFruitPctPoints(vegetableFruitNuts);
-    if (fruitPctPoints === 5) {
+    const fiberPoints = _computeFibrePoints(fibre);
+    
+    if (negativePoints < 11 || fruitPctPoints === 5) {
         return negativePoints - positivePoints;
     }
-    const fiberPoints = _computeFibrePoints(fibre);
     return negativePoints - (fiberPoints + fruitPctPoints);
 }
 
