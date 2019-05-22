@@ -56,15 +56,15 @@ export default class App extends React.Component {
 
   _computeNutriScore(event) {
     event.preventDefault();
-    const nutriScore = nutriscoreService.computeScore({
-      energy: this.state.energy,
-      saturatedFat: this.state.saturatedFat,
-      sugar: this.state.sugar,
-      protein: this.state.protein,
-      fibre: this.state.fibre,
-      salt: this.state.salt,
-      vegetableFruitNuts: this.state.vegetableFruitNuts
-    });
-    this.setState({ nutriScore });
+    // const data = {
+    //   energy: this.state.energy,
+    //   saturatedFat: this.state.saturatedFat,
+    //   sugar: this.state.sugar,
+    //   protein: this.state.protein,
+    //   fibre: this.state.fibre,
+    //   salt: this.state.salt,
+    //   vegetableFruitNuts: this.state.vegetableFruitNuts
+    // };
+    this.setState({ nutriScore: '?' });
   }
 }
